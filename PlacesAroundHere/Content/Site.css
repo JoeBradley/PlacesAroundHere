@@ -4,14 +4,13 @@ img { width: 600px; max-width: 100%; }
 .marker-number { border-radius: 100%; padding: 5px; background-color: #D94100; color: #fff; opacity: 0.5; }
 #MapSearch { position: absolute; z-index: 100; top: 10px; left: 150px; width: calc(100% - 220px); }
 #CopyToClipboard { float: right; }
+a.scroll-btn { color: #444 !important; display: none; }
 
 .msg-container { position: fixed; z-index: 100; bottom: 20px; width: 100%; text-align:center; display: none; }
 .msg-inner-container { display: inline-block; border-radius: 4px; margin: 5px auto; border: 2px solid #ddd;  background: #eee; color: #444; padding: 5px 10px;}
 
-.scroll-btn { display: none; }
 
 @media screen and (max-width: 980px) {
-    .scroll-btn { display: inline-block; border: 1px solid #ddd; border-radius: 4px; padding: 9px; background: #fff; }
-    .scroll-btn.top { position: absolute; z-index: 100; top: 10px; right: 20px; }
-    .scroll-btn a { color: #444 !important; }
+    a.scroll-btn { display: inline-block; border: 1px solid #ddd; border-radius: 4px; padding: 9px; background: #fff; }
+    a.scroll-btn.top { position: absolute; z-index: 100; top: 10px; right: 20px; }
 }
