@@ -37,7 +37,7 @@ function initMap() {
         if (places.length == 0) {
             return;
         }
-        
+
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function (place) {
             if (!place.geometry) {
@@ -52,9 +52,22 @@ function initMap() {
         });
         map.fitBounds(bounds);
     });
+
+    loadMarkerFromQueryString();
+}
+
+function loadMarkerFromQueryString() {
+    var latLngStr = getQueryStringParameterByName("latlng");
+
+    if (latLngStr !== null) {
+        var latLng = { lat: Number(latLngStr.split(",")[0]), lng: Number(latLngStr.split(",")[1]) };
+        addMarker(latLng);
+    }
 }
 
 function addMarker(latLng) {
+
+    console.log("Add Marker at: " + JSON.stringify(latLng));
 
     var marker = new google.maps.Marker({
         position: latLng,
@@ -69,6 +82,8 @@ function addMarker(latLng) {
 
     setLatLngText(marker.getPosition().toUrlValue());
 
+    setUrl(marker.getPosition().toUrlValue());
+
     console.log("Marker: " + JSON.stringify(marker.getPosition()));
 
     marker.addListener("click", function () {
@@ -76,10 +91,11 @@ function addMarker(latLng) {
     });
 
     getMarkerImages(marker);
+
+    map.panTo(latLng);
 }
 
-function setLatLngText(latLngUrl)
-{
+function setLatLngText(latLngUrl) {
     $("#markerlink").html(latLngUrl).attr("href", window.location.origin + "?latlng=" + latLngUrl);
 }
 
@@ -225,6 +241,7 @@ function GetLatLngOffset(latLng, distance, angle) {
 function bindEventHandlers() {
     document.addEventListener('copy', function (e) {
         var data = $("#markerlink").attr('href');
+        showMessage("Url copied to clipboard: " + data);
         e.clipboardData.setData('text/plain', data);
         e.preventDefault(); // We want our data, not data from any selection, to be written to the clipboard
     });
@@ -232,4 +249,26 @@ function bindEventHandlers() {
     $('#CopyToClipboard').click(function () {
         document.execCommand("copy");
     });
+}
+
+function getQueryStringParameterByName(name) {
+    url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function showMessage(msg) {
+    $('#Message').html(msg);
+    $('#MessageContainer').fadeIn();
+    setTimeout(function () { $('#MessageContainer').fadeOut(); }, 3000);
+}
+
+function setUrl(latLngUrl)
+{
+    var stateObj = { url: window.location.origin + "?latlng=" + latLngUrl };
+    history.pushState(stateObj, "Places near here", stateObj.url);
 }
