@@ -2,3 +2,5 @@
 img { width: 600px; max-width: 100%; }
 .map-container { max-width: 100%; display: block; overflow: hidden;}
 .marker-number { border-radius: 100%; padding: 5px; background-color: #D94100; color: #fff; opacity: 0.5;}
+#MapSearch { position: absolute; z-index: 100; top: 10px; left: 150px; width: calc(100% - 200px); }
+#CopyToClipboard { float: right;}

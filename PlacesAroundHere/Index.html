@@ -18,17 +18,24 @@
     <script src="Scripts/jquery-1.10.2.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/handlebars.min.js"></script>
-    
+
 </head>
 <body>
     <div class="">
         <div class="row">
             <div class="col-md-6">
                 <div class="map-container">
+                    <input id="MapSearch" class="form-control" type="text" placeholder="Search Box">
                     <div id="Map" style="height: 600px;"></div>
                 </div>
             </div>
             <div class="col-md-6" style="background: #eee;">
+                <div style="overflow: hidden">
+                    <span>
+                        Marker location:
+                    </span>
+                    <a id="markerlink" href="#"></a><span id="CopyToClipboard" class="btn btn-default">Copy to clipboard</span>
+                </div>
                 <div id="Photos" style="overflow-y:auto; overflow-x: hidden; height: 600px; overflow-y: auto; width: 100%;"></div>
             </div>
         </div>
@@ -49,6 +56,6 @@
         {{/each}}
     </script>
     <script src="Scripts/pah.app.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsckLpjx0mEdldrBJS-e7x1bUeC92M_oA&sensor=false&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsckLpjx0mEdldrBJS-e7x1bUeC92M_oA&sensor=false&libraries=places&callback=initMap"></script>
 </body>
 </html>

@@ -3,7 +3,10 @@
 var imageBaseUrl = "https://maps.googleapis.com/maps/api/streetview?key=" + apiKey + "&size=600x300&pitch=10&fov=120&location=";
 var metaDataBaseUrl = "https://maps.googleapis.com/maps/api/streetview/metadata?key=" + apiKey + "&size=600x300&pitch=10&fov=120&location=";
 
+var berlin = { lat: 52.5200, lng: 13.4050 };
+
 var map;
+var searchBox;
 var markers = [];
 var selectedMarker = null;
 var isLoaded = false;
@@ -12,43 +15,72 @@ var photosTemplate;
 function initMap() {
     photosTemplate = Handlebars.compile($("#PhotosTemplate").html());
 
-    //$.get("/Scripts/Templates/photos.js", function (tmplate) {
-    //    photosTemplate = Handlebars.compile(tmplate);
-    //    console.log("templ: " + JSON.stringify(photosTemplate));
-    //}).error(function (e) {
+    bindEventHandlers();
 
-    //    console.log("Culd not get templ");
-    //});
-
-    var berlin = { lat: 52.5200, lng: 13.4050 };
     map = new google.maps.Map(document.getElementById('Map'), {
         zoom: 12,
         center: berlin
     });
 
+    // Create the search box and link it to the UI element.
+    var searchBox = new google.maps.places.SearchBox(document.getElementById('MapSearch'));
+
     google.maps.event.addListener(map, 'click', function (event) {
         console.log("Click position: " + JSON.stringify(event));
-
-        var marker = new google.maps.Marker({
-            position: event.latLng,
-            map: map
-        });
-
-        markers.push(marker);
-
-        hidePhotoMarkers();
-
-        selectedMarker = marker;
-
-        console.log("Marker: " + JSON.stringify(marker.getPosition()));
-
-        marker.addListener("click", function () {
-            showMarkerImages(marker);
-        });
-
-        getMarkerImages(marker);
-
+        var latLng = event.latLng;
+        addMarker(latLng);
     });
+
+    searchBox.addListener('places_changed', function () {
+        var places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+        
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function (place) {
+            if (!place.geometry) {
+                return;
+            }
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+    });
+}
+
+function addMarker(latLng) {
+
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map
+    });
+
+    markers.push(marker);
+
+    hidePhotoMarkers();
+
+    selectedMarker = marker;
+
+    setLatLngText(marker.getPosition().toUrlValue());
+
+    console.log("Marker: " + JSON.stringify(marker.getPosition()));
+
+    marker.addListener("click", function () {
+        showMarkerImages(marker);
+    });
+
+    getMarkerImages(marker);
+}
+
+function setLatLngText(latLngUrl)
+{
+    $("#markerlink").html(latLngUrl).attr("href", window.location.origin + "?latlng=" + latLngUrl);
 }
 
 function hidePhotoMarkers() {
@@ -188,4 +220,16 @@ function GetLatLngOffset(latLng, distance, angle) {
     var latLng = { lat: ConvertRadiansToDegrees(φ2), lng: ConvertRadiansToDegrees(λ2) };
 
     return latLng;
+}
+
+function bindEventHandlers() {
+    document.addEventListener('copy', function (e) {
+        var data = $("#markerlink").attr('href');
+        e.clipboardData.setData('text/plain', data);
+        e.preventDefault(); // We want our data, not data from any selection, to be written to the clipboard
+    });
+
+    $('#CopyToClipboard').click(function () {
+        document.execCommand("copy");
+    });
 }
