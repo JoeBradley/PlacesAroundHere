@@ -1,6 +1,14 @@
-﻿body { overflow-x: hidden;}
+﻿body { overflow-x: hidden; }
 img { width: 600px; max-width: 100%; }
-.map-container { max-width: 100%; display: block; overflow: hidden;}
-.marker-number { border-radius: 100%; padding: 5px; background-color: #D94100; color: #fff; opacity: 0.5;}
-#MapSearch { position: absolute; z-index: 100; top: 10px; left: 150px; width: calc(100% - 200px); }
-#CopyToClipboard { float: right;}
+.map-container { max-width: 100%; display: block; overflow: hidden; }
+.marker-number { border-radius: 100%; padding: 5px; background-color: #D94100; color: #fff; opacity: 0.5; }
+#MapSearch { position: absolute; z-index: 100; top: 10px; left: 150px; width: calc(100% - 220px); }
+#CopyToClipboard { float: right; }
+
+.scroll-btn { display: none; }
+
+@media screen and (max-width: 980px) {
+    .scroll-btn { display: block; border: 1px solid #ddd; border-radius: 4px; padding: 9px; background: #fff; }
+    .scroll-btn.top { position: absolute; z-index: 100; top: 10px; right: 20px; }
+    .scroll-btn a { color: #444 !important; }
+}
