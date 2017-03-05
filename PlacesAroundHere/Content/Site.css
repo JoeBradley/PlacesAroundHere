@@ -1,16 +1,42 @@
-﻿body { overflow-x: hidden; }
+﻿body { overflow-x: hidden; background: rgba(217, 65, 0, 0.68); box-sizing: border-box; }
+::-webkit-scrollbar { width: 12px;  height: 12px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); }
+
 img { width: 600px; max-width: 100%; }
-.map-container { max-width: 100%; display: block; overflow: hidden; height: 100%; max-height: 100%; }
-.marker-number { border-radius: 100%; padding: 5px; background-color: #D94100; color: #fff; opacity: 0.5; }
-#MapSearch { position: absolute; z-index: 100; top: 10px; left: 150px; width: calc(100% - 220px); }
-#CopyToClipboard { float: right; }
+a { color: #fff !important; }
+
+.row { height: 100%; }
+.right-col { color: #fff; }
+.no-gutter { padding-left: 15px; padding-right: 15px; }
+.no-gutter > [class*='col-'] { padding-right:0; padding-left: 0; }
+
 a.scroll-btn { color: #444 !important; display: none; }
 
-.msg-container { position: fixed; z-index: 100; bottom: 20px; width: 100%; text-align:center; display: none; }
-.msg-inner-container { display: inline-block; border-radius: 4px; margin: 5px auto; border: 2px solid #ddd;  background: #eee; color: #444; padding: 5px 10px;}
+/* left-col */
+.map-container { max-width: 100%; display: block; overflow: hidden; height: 100%; max-height: 100%; }
+.marker-number { border-radius: 100%; padding: 5px; background-color: #D94100; color: #fff; opacity: 0.5; }
+#Map { height: 100%; }
+#MapSearch { position: absolute; z-index: 100; top: 10px; left: 150px; width: calc(100% - 220px); }
+
+/* right-col */
+.controlbar { overflow: hidden; background-color: #D94100; padding: 10px 10px; line-height: 34px; }
+#CopyToClipboard { float: right; padding: 9px 12px; }
+#ScrollTop { float: right; margin-left: 10px; }
+#Photos { overflow-y: auto; overflow-x: hidden; height: 600px; overflow-y: auto; width: 100%; text-align: center; }
+.photo-container { position: relative; display: inline-block; margin: 1px auto; overflow: hidden; }
+.photo-number { position: absolute; top: 10px; left: 10px; z-index: 1; }
+
+/* footer */
+.msg-container { position: fixed; z-index: 100; bottom: 20px; width: 100%; text-align: center; display: none; }
+.msg-inner-container { display: inline-block; border-radius: 4px; margin: 5px auto; border: 2px solid #ddd; background: #eee; color: #444; padding: 5px 10px; }
 
 
 @media screen and (max-width: 980px) {
     a.scroll-btn { display: inline-block; border: 1px solid #ddd; border-radius: 4px; padding: 9px; background: #fff; }
     a.scroll-btn.top { position: absolute; z-index: 100; top: 10px; right: 20px; }
+}
+
+@media screen and (min-width: 980px) {
+    body { overflow-y: hidden; }    
 }
