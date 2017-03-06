@@ -1,4 +1,4 @@
-﻿body { overflow-x: hidden; background: rgba(217, 65, 0, 0.68); box-sizing: border-box; }
+﻿body { overflow: hidden; background: rgba(217, 65, 0, 0.68); box-sizing: border-box; }
 ::-webkit-scrollbar { width: 12px;  height: 12px; }
 ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
 ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); }
