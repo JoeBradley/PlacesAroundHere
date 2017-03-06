@@ -3,10 +3,10 @@
 ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
 ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.5); }
 
-img { width: 600px; max-width: 100%; }
+img { width: 660px; max-width: 100%; }
 a { color: #fff !important; }
 
-.row { height: 100%; }
+.row { height: 100%; max-height: 100%; }
 .right-col { color: #fff; }
 .no-gutter { padding-left: 15px; padding-right: 15px; }
 .no-gutter > [class*='col-'] { padding-right:0; padding-left: 0; }
@@ -20,10 +20,12 @@ a.scroll-btn { color: #444 !important; display: none; }
 #MapSearch { position: absolute; z-index: 100; top: 10px; left: 150px; width: calc(100% - 220px); }
 
 /* right-col */
-.controlbar { overflow: hidden; background-color: #D94100; padding: 10px 10px; line-height: 34px; }
+.inner-container { display: flex; flex-direction: column; height: 100%; }
+.controlbar { background-color: #D94100; padding: 10px 10px; line-height: 34px; }
 #CopyToClipboard { float: right; padding: 9px 12px; }
 #ScrollTop { float: right; margin-left: 10px; }
-#Photos { overflow-y: auto; overflow-x: hidden; height: 600px; overflow-y: auto; width: 100%; text-align: center; }
+
+#Photos { flex-grow: 1; overflow-y: auto; overflow-x: hidden; width: 100%; text-align: center; }
 .photo-container { position: relative; display: inline-block; margin: 1px auto; overflow: hidden; }
 .photo-number { position: absolute; top: 10px; left: 10px; z-index: 1; }
 
