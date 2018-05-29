@@ -22,41 +22,44 @@
 
 </head>
 <body>
-    <div class="">
-        <div class="row" style="height: 100%;">
+    <div>
+        <div class="row no-gutter">
             <div class="col-md-6">
                 <a id="Top"></a>
                 <div class="map-container">
                     <input id="MapSearch" class="form-control" type="text" placeholder="Search Box">
-                    <div id="Map" style="height: 600px;"></div>
-                    <div id="ScrollBottom" class="scroll-btn top"><a href="#Bottom"><i class="fa fa-chevron-down"></i></a></div>
+                    <div id="Map"></div>
+                    <a id="ScrollBottom" href="#Bottom" class="scroll-btn top"><i class="fa fa-chevron-down"></i></a>
                 </div>
             </div>
-            <div class="col-md-6" style="background: #eee;">
+            <div class="col-md-6 right-col">
                 <a id="Bottom"></a>
-                <div style="overflow: hidden; background-color: #efefef; padding: 3px 10px; line-height: 34px;">
-                    <span>
-                        Marker location:
-                    </span>
-                    <div id="ScrollTop" class="scroll-btn btn" style="float: right; margin-left: 10px;"><a href="#Top"><i class="fa fa-chevron-up"></i></a></div>
-                    <a id="markerlink" href="#"></a><span id="CopyToClipboard" class="btn btn-default"><i class="fa fa-clone"></i></span>
+                <div class="inner-container">
+                    <div class="controlbar">
+                        <span>
+                            <i class="fa fa-map"></i>&nbsp;
+                            Marker location:
+                        </span>
+                        <a id="ScrollTop" href="#Top" class="scroll-btn btn"><i class="fa fa-chevron-up"></i></a>
+                        <a id="markerlink" href="#"></a><span id="CopyToClipboard" class="btn btn-default"><i class="fa fa-clone"></i></span>
+                    </div>
+                    <div id="Photos"></div>
                 </div>
-                <div id="Photos" style="overflow-y:auto; overflow-x: hidden; height: 600px; overflow-y: auto; width: 100%;"></div>
             </div>
         </div>
-
     </div>
+
     <div id="MessageContainer" class="msg-container">
         <div class="msg-inner-container">
-            <span id="Message">This is a message</span>
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;<span id="Message">This is a message</span>
         </div>
     </div>
 
     <script id="PhotosTemplate" type="text/x-handlebars-template">
         {{#each photos}}
-        <div style="position:relative; display: block;">
+        <div class="photo-container">
             <a name="photo_{{@index}}"></a>
-            <div style="position: absolute; top: 10px; left: 10px; z-index: 1;">
+            <div class="photo-number">
                 <span class="marker-number">
                     {{@index}}
                 </span>

@@ -204,6 +204,7 @@ function showMarkerImages(marker) {
     selectedMarker = marker;
     showPhotoMarkers();
     $("#Photos").html(photosTemplate(marker));
+    setUrl(marker.getPosition().toUrlValue());
 }
 
 function ConvertDegreesToRadians(degrees) { return degrees * (Math.PI / 180.0); }
